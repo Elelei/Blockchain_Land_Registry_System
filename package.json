@@ -1,0 +1,37 @@
+{
+  "name": "land-registry-project",
+  "version": "1.0.0",
+  "description": "Blockchain-based Land Registry System",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "contracts"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --prefix contracts && npm install --prefix frontend",
+    "compile": "npm run compile --prefix contracts",
+    "test": "npm run test --prefix contracts",
+    "test:watch": "npm run test --prefix contracts -- --watch",
+    "deploy:local": "npm run deploy --prefix contracts",
+    "node": "npm run node --prefix contracts",
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "clean": "npm run clean:root && npm run clean:contracts && npm run clean:frontend",
+    "clean:root": "rimraf node_modules",
+    "clean:contracts": "rimraf contracts/node_modules contracts/artifacts contracts/cache",
+    "clean:frontend": "rimraf frontend/node_modules frontend/dist frontend/.vite",
+    "lint": "npm run lint --prefix frontend",
+    "setup": "npm run install:all",
+    "start:blockchain": "npm run node --prefix contracts",
+    "start:frontend": "npm run dev --prefix frontend",
+    "seed": "cd contracts && npx hardhat run scripts/seed.js --network localhost",
+    "grant-superadmin": "cd contracts && npx hardhat run scripts/grant-superadmin.js --network localhost",
+    "send-eth": "cd contracts && npx hardhat run scripts/send-eth.js --network localhost",
+    "ensure-deployed": "cd contracts && npx hardhat run scripts/ensure-deployed.js --network localhost"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "rimraf": "^5.0.5"
+  }
+}
