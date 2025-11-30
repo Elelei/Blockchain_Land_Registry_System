@@ -1,0 +1,44 @@
+# Netlify Configuration for Blockchain Land Registry System
+# This file configures Netlify build settings and environment
+
+[build]
+  # Base directory for the build
+  base = "."
+  
+  # Build command with increased memory limit
+  command = "NODE_OPTIONS=--max-old-space-size=4096 npm --workspace land-registry-frontend run build"
+  
+  # Publish directory (where the built files are)
+  publish = "frontend/dist"
+
+# Build environment variables
+[build.environment]
+  # Increase Node.js memory limit to 4096MB (4GB)
+  NODE_OPTIONS = "--max-old-space-size=4096"
+  
+  # Node.js version (will use .nvmrc if available)
+  NODE_VERSION = "18"
+  
+  # Enable npm ci for faster, reliable builds
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Redirects and rewrites (for React Router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
