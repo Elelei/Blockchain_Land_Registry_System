@@ -5,7 +5,7 @@
   # Base directory for the build
   base = "."
   
-  # Build command with increased memory limit
+  # Build command with increased memory limit and legacy peer deps
   command = "NODE_OPTIONS=--max-old-space-size=4096 npm --workspace land-registry-frontend run build"
   
   # Publish directory (where the built files are)
